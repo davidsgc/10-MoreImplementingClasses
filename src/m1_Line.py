@@ -460,9 +460,12 @@ class Line(object):
         run = self.start.x - self.end.x
         if rise == 0:
             length = run
-            if length
+           # if length < 0:
+              #  length = length * -1
         elif run == 0:
             length = rise
+           # if length <0:
+               # length = length * -1
         else:
             length = math.sqrt(rise ** 2 / run ** 2)
         return length
