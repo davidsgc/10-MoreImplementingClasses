@@ -90,6 +90,7 @@ class Point(object):
         """ Sets instance variables  x  and  y  to the given coordinates. """
         self.x = x
         self.y = y
+        self.clones = 0
 
     def __repr__(self):
         """
@@ -339,6 +340,7 @@ class Line(object):
         start = self.start
         end = self.end
         line = Line(start, end)
+        self.clones = self.clones + 1
         return line
 
     def reverse(self):
@@ -416,9 +418,7 @@ class Line(object):
         # ---------------------------------------------------------------------
         rise = self.end.y - self.start.y
         run = self.end.x - self.start.x
-        if rise == 0:
-            slope = 0
-        elif run == 0:
+        if run == 0:
             slope = math.inf
         else:
             slope = rise/run
@@ -456,18 +456,7 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
-        rise = self.start.y - self.end.y
-        run = self.start.x - self.end.x
-        if rise == 0:
-            length = run
-           # if length < 0:
-              #  length = length * -1
-        elif run == 0:
-            length = rise
-           # if length <0:
-               # length = length * -1
-        else:
-            length = math.sqrt(rise ** 2 / run ** 2)
+        length = ((self.end.y - self.start.y)**2 + (self.end.x - self.start.x)**2)**1/2
         return length
     
     def get_number_of_clones(self):
@@ -509,6 +498,7 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
+        return self.clones
 
     def line_plus(self, other_line):
         """
